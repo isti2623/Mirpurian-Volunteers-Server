@@ -56,10 +56,20 @@ async function run() {
             res.json(result);
         })
 
+        //Update get
+        app.get('/users/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const user = await eventCollection.findOne(query);
+            // console.log('load user with id: ', id);
+            res.send(user);
+        })
+
         //update product
-        app.put("/events/update/:id", async (req, res) => {
+        app.put("/users/:id", async (req, res) => {
             const id = req.params.id;
             const updatedName = req.body;
+            console.log(updatedName);
             const filter = { _id: ObjectId(id) };
 
             eventCollection
